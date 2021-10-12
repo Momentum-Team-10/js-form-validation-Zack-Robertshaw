@@ -72,16 +72,18 @@ function validateName(input) {
     }
 
 }
-function validateCarYear(params) {
+function validateCarYear(input) {
     let errorEl = document.createElement('p')
-    errorEl.id = "start-date-error"
+    errorEl.id = "cay-year-error"
 
-    if (condition) {
-        
-    } else {
-        
-    }
-}
+    if ((input.value) => 1901 && =< (moment(input.value).isBefore(now))) { 
+        input.classList.remove('invalid')
+        input.classList.add('valid')
+        if (document.getElementById('start-date-error')) {
+            document.getElementById('start-date-error').remove()
+        }
+        checkinInput.classList.remove('invalid')
+        checkinInput.classList.add('valid')}
 
 function validateCarMake(params) {
     let errorEl = document.createElement('p')
