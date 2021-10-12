@@ -1,14 +1,14 @@
-const parkingForm = document.getElementById('parking-form')
+let parkingForm = document.getElementById('parking-form')
 
-const nameField = document.getElementById('name-field')
-const carYear = document.getElementById('car-year')
-const carMake = document.getElementById('car-make')
-const carModel = document.getElementById('car-model')
-const startDate = document.getElementById('start-date')
-const days = document.getElementById('days')
-const creditCard = document.getElementById('credit-card')
-const cvv = document.getElementById('cvv')
-const expiration = document.getElementById('expiration')
+let nameField = document.getElementById('name-field')
+let carYear = document.getElementById('car-year')
+let carMake = document.getElementById('car-make')
+let carModel = document.getElementById('car-model')
+let startDate = document.getElementById('start-date')
+let days = document.getElementById('days')
+let creditCard = document.getElementById('credit-card')
+let cvv = document.getElementById('cvv')
+let expiration = document.getElementById('expiration')
 
 parkingForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -28,32 +28,53 @@ parkingForm.addEventListener('submit', (event) => {
 // need a function for each element ID
 // also need to make each required
 // submit button should do all the validation, not each field
-if (/\d/.test(nameField.value) === true || nameField.value === '') {
-    nameField.classList.remove('input-valid')
-    nameField.classList.remove('input-invalid')
-} else {
-    nameField.classList.remove('input-invalid')
-    nameField.classList.remove('input-valid')
 
-}
+//  This is what James A. had
+//     if (/\d/.test(nameField.value) === true || nameField.value === '') {
+//     nameField.classList.remove('input-valid')
+//     nameField.classList.remove('input-invalid')
+// } else {
+//     nameField.classList.remove('input-invalid')
+//     nameField.classList.remove('input-valid')
+
+// }
+
 
 
 
 
 
 function validateName(input) {
+
     let errorEl = document.createElement('p')
-    errorEl.id = 'name error'
-    if (input.value ==) {
-        
-    } else {
-        
+    errorEl.id = 'name-error'
+    // found this name regEx
+    let regExName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    // copied 51-69 from today's example and tried to change getElementById Id's to match, pretty sure it doesn't work
+    if (regExName.test(input.value)) {
+        input.classList.remove('invalid')
+        input.classList.add('valid')
+
+    } else if input.value === '' {
+        errorEl.innerText = 'name is required'
+        document.getElementById('name-field').appendChild(errorEl)
+        input.classList.remove('valid')
     }
+
+    else {
+        if (document.getElementById('name-error')) {
+            document.getElementById('name-error').remove()
+        }
+        errorEl.innerText = 'Must enter valid name'
+        document.getElementById('nameField').appendChild(errorEl)
+        input.classList.remove('valid')
+        input.classList.add('invalid')
+    }
+
 }
 function validateCarYear(params) {
     let errorEl = document.createElement('p')
     errorEl.id = "start-date-error"
-    console.log(input.value)
 
     if (condition) {
         
@@ -65,7 +86,6 @@ function validateCarYear(params) {
 function validateCarMake(params) {
     let errorEl = document.createElement('p')
     errorEl.id = "start-date-error"
-    console.log(input.value)
 
     if (condition) {
         
@@ -90,12 +110,13 @@ function validateStartDate (input) {
     let errorEl = document.createElement('p')
     errorEl.id = "start-date-error"
     console.log(input.value)
-    // Cannot checkin before today
+
     if (moment(input.value).isBefore(now)) {
         errorEl.innerText = "You must choose a date after today"
         document.getElementById('check-in-div').appendChild(errorEl)
         console.log('date must be after today')
         checkinInput.classList.add('invalid')
+
     } else {
         if (document.getElementById('start-date-error')) {
             document.getElementById('start-date-error').remove()
@@ -103,9 +124,6 @@ function validateStartDate (input) {
         checkinInput.classList.remove('invalid')
         checkinInput.classList.add('valid')
     }
-    // Cannot checkout in under 5 days
-    // Check in time no earlier than 1pm
-    // Check out time no later than 10am
 }
 
 function validateStartDate(params) {
@@ -170,8 +188,4 @@ function ValidateExpiration(params) {
 
 
 
-
-// form.addEventListener('submit', (event)) => {
-//     event.preventDefault()
-// 
 
